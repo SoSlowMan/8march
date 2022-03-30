@@ -7,26 +7,39 @@ public class LevelSwitcherScript : MonoBehaviour
 {
     public GameObject player;
     public float playerRange = 4f;
+    public GameObject buttonPromt;
+    bool touched;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        buttonPromt.SetActive(false);
+        touched = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < playerRange && Input.GetKeyDown(KeyCode.E))
+        if (Vector3.Distance(transform.position, player.transform.position) < playerRange)
         {
-            if (SceneManager.GetActiveScene().name == "SampleScene")
-            {
-                SceneManager.LoadScene("level2");
+            touched = true;
+            if (Input.GetKeyDown(KeyCode.E))
+            {    
+                switch (SceneManager.GetActiveScene().name)
+                {
+                    case "SampleScene":
+                        SceneManager.LoadScene("level2");
+                        break;
+                    case "level3":
+                        SceneManager.LoadScene("level4");
+                        break;
+                }
             }
-            else
-            {
-                SceneManager.LoadScene("level4");
-            }
+        }
+
+        if (touched == true)
+        {
+            buttonPromt.SetActive(true);
         }
     }
 }
