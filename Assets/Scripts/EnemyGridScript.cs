@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyGridScript : MonoBehaviour
 {
@@ -13,14 +14,9 @@ public class EnemyGridScript : MonoBehaviour
         StartCoroutine(Spawn());
     }
 
-    void Update()
-    {
-        
-    }
-
-    // Update is called once per frame
     IEnumerator Spawn()
     {
+        yield return new WaitForSeconds(2f);
         for (i = 0; i < enemies.Length; i++)
         {
             enemies[i].SetActive(true);
