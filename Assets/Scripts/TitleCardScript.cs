@@ -21,8 +21,14 @@ public class TitleCardScript : MonoBehaviour
             case("SampleScene"):
                 yield return new WaitForSeconds(3f);
                 break;
+            case ("level2"):
+                yield return new WaitForSeconds(2f);
+                break;
             case ("level3"):
                 yield return new WaitForSeconds(2.3f);
+                break;
+            case ("level4"):
+                yield return new WaitForSeconds(2f);
                 break;
             case ("level6"):
                 yield return new WaitForSeconds(2f);
