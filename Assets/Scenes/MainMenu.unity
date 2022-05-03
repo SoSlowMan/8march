@@ -315,6 +315,8 @@ MonoBehaviour:
   font2: {fileID: 1902420321}
   cam: {fileID: 336188584}
   changeSkinButton: {fileID: 1593279947}
+  isComplete: 0
+  skin: 0
 --- !u!4 &998452917
 Transform:
   m_ObjectHideFlags: 0

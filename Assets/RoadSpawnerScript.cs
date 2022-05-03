@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickupSpawnerScript2 : MonoBehaviour
+public class RoadSpawnerScript : MonoBehaviour
 {
-    public GameObject pickup;
-
+    [SerializeField]
+    GameObject roadBlock;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,21 +15,12 @@ public class PickupSpawnerScript2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    public void SpawnPickup()
-    {
-        Instantiate(pickup, transform.position, transform.rotation);
+        
     }
 
     IEnumerator Spawn()
     {
         yield return new WaitForSeconds(2f);
-        for (int i = 0; i < 100; i++)
-        {
-            SpawnPickup();
-            yield return new WaitForSeconds(7f);
-        }
+        Instantiate(roadBlock);
     }
 }

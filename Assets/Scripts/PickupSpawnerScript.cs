@@ -25,6 +25,7 @@ public class PickupSpawnerScript : MonoBehaviour
 
     IEnumerator Spawn()
     {
+        yield return new WaitForSeconds(2f);
         for (int i = 0; i < 100; i++)
         {
             SpawnPickup();

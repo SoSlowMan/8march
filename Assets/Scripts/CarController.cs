@@ -10,6 +10,14 @@ public class CarController : MonoBehaviour
     private Vector2 moveInput;
     public int moveSpeed;
     public int counter;
+    [SerializeField]
+    private Animator anim;
+
+    private States State //свойство типа States
+    {
+        get { return (States)anim.GetInteger("state"); } //получаем значение state из аниматора
+        set { anim.SetInteger("state", (int)value); } //меняем значение state
+    }
 
     private void Awake()
     {
@@ -19,6 +27,7 @@ public class CarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(Wait());
         counter = 0;
         AudioController.instance.PlayRoadMusic();
     }
@@ -49,5 +58,11 @@ public class CarController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    public enum States
+    {
+        left,
+        right
     }
 }
