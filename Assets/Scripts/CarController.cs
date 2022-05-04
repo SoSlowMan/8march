@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,12 +11,18 @@ public class CarController : MonoBehaviour
     public int counter;
     [SerializeField]
     private Animator anim;
+    private Quaternion leftTurn, rightTurn;
+    [SerializeField]
+    GameObject image;
+    [SerializeField]
+    float timeCount = 0.0f;//для поворота
+    float turnSpeed = 0.2f;
 
-    private States State //свойство типа States
+    /*private States State //свойство типа States
     {
         get { return (States)anim.GetInteger("state"); } //получаем значение state из аниматора
         set { anim.SetInteger("state", (int)value); } //меняем значение state
-    }
+    }*/
 
     private void Awake()
     {
@@ -27,6 +32,8 @@ public class CarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        leftTurn = Quaternion.Euler(new Vector3(0f, 0f, 15f));
+        rightTurn = Quaternion.Euler(new Vector3(0f, 0f, 15f));
         StartCoroutine(Wait());
         counter = 0;
         AudioController.instance.PlayRoadMusic();
@@ -35,8 +42,8 @@ public class CarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 moveVertical = transform.right * Input.GetAxis("Horizontal");
-        rb.velocity = (moveVertical) * moveSpeed;
+        Move();
+
         if (SceneManager.GetActiveScene().name == "level2")
         {
             if (counter == 7)
@@ -60,9 +67,28 @@ public class CarController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
-    public enum States
+    /*public enum States
     {
         left,
         right
+    }*/
+
+    void Move()
+    {
+        Vector3 moveVertical = transform.right * Input.GetAxis("Horizontal");
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            image.transform.rotation = Quaternion.Slerp(transform.rotation, rightTurn, timeCount);
+        }
+        else if (Input.GetAxis("Horizontal") < 0)
+        {
+            image.transform.rotation = Quaternion.Slerp(transform.rotation, leftTurn, timeCount);
+        }
+        else if (Input.GetAxis("Horizontal") < 0)
+        {
+            timeCount = 0;
+        }
+        timeCount += Time.deltaTime * turnSpeed;
+        rb.velocity = (moveVertical) * moveSpeed;
     }
 }
