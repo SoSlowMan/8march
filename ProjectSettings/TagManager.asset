@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Bullet
+  - Destroyer
+  - PickupSpawner
+  - Borders
   layers:
   - Default
   - TransparentFX
