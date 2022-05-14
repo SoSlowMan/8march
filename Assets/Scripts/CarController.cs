@@ -23,6 +23,7 @@ public class CarController : MonoBehaviour
     GameObject spawner;
     [SerializeField]
     GameObject borders;
+    public bool done;
 
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class CarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        done = false;
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         spawner = GameObject.FindGameObjectWithTag("PickupSpawner");
         borders = GameObject.FindGameObjectWithTag("Borders");
@@ -87,19 +89,19 @@ public class CarController : MonoBehaviour
 
     void TurnRight()
     {
-        image.transform.rotation = Quaternion.Slerp(transform.rotation, rightTurn, turnSpeed * timeCount);
+        image.transform.rotation = Quaternion.Slerp(image.transform.rotation, rightTurn, turnSpeed * timeCount);
         timeCount = timeCount + Time.deltaTime;
     }
 
     void TurnLeft()
     {
-        image.transform.rotation = Quaternion.Slerp(transform.rotation, leftTurn, turnSpeed * timeCount);
+        image.transform.rotation = Quaternion.Slerp(image.transform.rotation, leftTurn, turnSpeed * timeCount);
         timeCount = timeCount + Time.deltaTime;
     }
 
     void ZeroTurn()
     {
-        image.transform.rotation = Quaternion.Slerp(transform.rotation, zeroTurn, turnSpeed * 0.1f);
+        image.transform.rotation = Quaternion.Slerp(image.transform.rotation, zeroTurn, turnSpeed * 0.1f);
     }
 
     void CameraFollow()
@@ -124,14 +126,16 @@ public class CarController : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "level2")
         {
-            if (counter == 7)
+            if (counter == 12)
             {
                 SceneManager.LoadScene("level2_2");
+                done = true;
             }
         }
-        else if (counter == 12)
+        else if (counter == 17)
         {
             SceneManager.LoadScene("level5");
+            done = true;
         }
     }
 }
