@@ -6,10 +6,13 @@ public class EnemyScript : MonoBehaviour
 {
     public int health = 1;
 
+    [SerializeField]
+    Sprite[] sprites;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetComponentInChildren<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
     }
 
     // Update is called once per frame

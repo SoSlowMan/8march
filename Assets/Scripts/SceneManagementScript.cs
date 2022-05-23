@@ -14,7 +14,6 @@ public class SceneManagementScript : MonoBehaviour
     public void StartLevel1()
     {
         SceneManager.LoadScene("SampleScene");
-        Debug.Log("FUCK");
     }
 
     public void StartLevel2()

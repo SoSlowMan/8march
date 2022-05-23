@@ -63,5 +63,6 @@ public class ShipController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         anim.enabled = true;
+        yield return new WaitForSeconds(0f);
     }
 }
