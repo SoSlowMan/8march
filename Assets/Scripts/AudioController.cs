@@ -7,7 +7,7 @@ public class AudioController : MonoBehaviour
 {
     public static AudioController instance;
 
-    public AudioSource myRoomMusic, ksuMusic, mainMenuMusic, roadMusic, pickupSound, explosionSound, shootMusic, shootSound;
+    public AudioSource myRoomMusic, ksuMusic, mainMenuMusic, roadMusic, pickupSound, explosionSound, shootMusic, shootSound, engineSound;
 
     private void Awake()
     {
@@ -60,5 +60,12 @@ public class AudioController : MonoBehaviour
     {
         shootSound.Stop();
         shootSound.Play();
+    }
+
+    public void PlayEngineSound()
+    {
+        engineSound.Stop();
+        engineSound.volume = 0.33f;
+        engineSound.Play();
     }
 }

@@ -24,6 +24,10 @@ public class CarController : MonoBehaviour
     [SerializeField]
     GameObject borders;
     public bool done;
+    [SerializeField]
+    Transform firePoint;
+    [SerializeField]
+    GameObject bullet;
 
     private void Awake()
     {
@@ -43,6 +47,7 @@ public class CarController : MonoBehaviour
         //StartCoroutine(Wait());
         counter = 0;
         AudioController.instance.PlayRoadMusic();
+        AudioController.instance.PlayEngineSound();
     }
 
     // Update is called once per frame
@@ -53,6 +58,12 @@ public class CarController : MonoBehaviour
         SpawnerFollow();
         BordersFollow();
         LevelSwitcher();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(bullet, firePoint.position, firePoint.rotation);
+            AudioController.instance.PlayShootSound();
+        }
     }
 
     IEnumerator Wait()

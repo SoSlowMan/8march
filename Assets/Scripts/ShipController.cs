@@ -10,10 +10,11 @@ public class ShipController : MonoBehaviour
     public Rigidbody2D rb;
     private Vector2 moveInput;
     public int moveSpeed;
-    public Transform firePoint, firePoint1;
-    public Animator anim;
+    public Transform firePoint;
     public int counter;
     //public GameObject endText;
+    [SerializeField]
+    Camera mainCamera;
 
     private void Awake()
     {
@@ -33,15 +34,9 @@ public class ShipController : MonoBehaviour
         Vector3 moveVertical = transform.right * Input.GetAxis("Horizontal");
         rb.velocity = (moveVertical) * moveSpeed;// * Time.deltaTime; doesn't work on some PC's, idk why
 
-        if (transform.position.y == -4f)
-        {
-            anim.enabled = false;
-        }
-
         if (Input.GetMouseButtonDown(0))
         {
                 Instantiate(bullet, firePoint.position, firePoint.rotation);
-                Instantiate(bullet, firePoint1.position, firePoint1.rotation);
                 AudioController.instance.PlayShootSound();
         }
 
@@ -54,7 +49,7 @@ public class ShipController : MonoBehaviour
         }
     }
 
-    IEnumerator Wait()
+    /*IEnumerator Wait()
     {
         anim.enabled = false;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -64,5 +59,14 @@ public class ShipController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         anim.enabled = true;
         yield return new WaitForSeconds(0f);
+    }*/
+    void CameraFollow()
+    {
+        Vector3 carPos = new Vector3(0f, transform.position.y + 3.15f, -10f);
+        mainCamera.transform.position = carPos;
     }
 }
+
+
+
+
