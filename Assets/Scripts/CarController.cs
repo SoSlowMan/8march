@@ -11,7 +11,7 @@ public class CarController : MonoBehaviour
     public int counter;
     [SerializeField]
     private Animator anim;
-    private Quaternion leftTurn, rightTurn, zeroTurn;
+    private Quaternion leftTurn, rightTurn, zeroTurn, leftShipTurn, rightShipTurn;
     [SerializeField]
     GameObject image;
     [SerializeField]
@@ -42,6 +42,8 @@ public class CarController : MonoBehaviour
         spawner = GameObject.FindGameObjectWithTag("PickupSpawner");
         borders = GameObject.FindGameObjectWithTag("Borders");
         leftTurn = Quaternion.Euler(new Vector3(0f, 0f, 15f));
+        leftShipTurn = Quaternion.Euler(new Vector3(0f, 15f, 0f));
+        rightShipTurn = Quaternion.Euler(new Vector3(0f, 15f, 0f));
         rightTurn = Quaternion.Euler(new Vector3(0f, 0f, -15f));
         zeroTurn = Quaternion.Euler(new Vector3(0f, 0f, 0f));
         //StartCoroutine(Wait());
@@ -100,13 +102,27 @@ public class CarController : MonoBehaviour
 
     void TurnRight()
     {
-        image.transform.rotation = Quaternion.Slerp(image.transform.rotation, rightTurn, turnSpeed * timeCount);
+        if (SceneManager.GetActiveScene().name == "level6")
+        {
+            image.transform.rotation = Quaternion.Slerp(image.transform.rotation, rightShipTurn, turnSpeed * timeCount);
+        }
+        else
+        {
+            image.transform.rotation = Quaternion.Slerp(image.transform.rotation, rightTurn, turnSpeed * timeCount);
+        }
         timeCount = timeCount + Time.deltaTime;
     }
 
     void TurnLeft()
     {
-        image.transform.rotation = Quaternion.Slerp(image.transform.rotation, leftTurn, turnSpeed * timeCount);
+        if (SceneManager.GetActiveScene().name == "level6")
+        {
+            image.transform.rotation = Quaternion.Slerp(image.transform.rotation, leftShipTurn, turnSpeed * timeCount);
+        }
+        else
+        {
+            image.transform.rotation = Quaternion.Slerp(image.transform.rotation, leftTurn, turnSpeed * timeCount);
+        }
         timeCount = timeCount + Time.deltaTime;
     }
 

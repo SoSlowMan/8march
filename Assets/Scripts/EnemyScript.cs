@@ -13,6 +13,7 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         GetComponentInChildren<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
+        GetComponentInChildren<SpriteRenderer>().color = Color.white;
     }
 
     // Update is called once per frame
@@ -20,7 +21,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (health <= 0)
         {
-            ShipController.instance.counter++;
+            CarController.instance.counter++;
             AudioController.instance.PlayExplosionSound();
             Destroy(gameObject);
         }        

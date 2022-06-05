@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoadSpawnerScript : MonoBehaviour
 {
@@ -11,8 +12,16 @@ public class RoadSpawnerScript : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Instantiate(roadBlock, new Vector3(transform.position.x, transform.position.y + 15.41f, transform.position.z), Quaternion.identity);
+            if (SceneManager.GetActiveScene().name == "level6")
+            {
+                Instantiate(roadBlock, new Vector3(transform.position.x, transform.position.y + 10f, transform.position.z), Quaternion.identity);
+                transform.position = new Vector3(transform.position.x, transform.position.y + 10f, transform.position.z);
+            }
+            else
+            {
+                Instantiate(roadBlock, new Vector3(transform.position.x, transform.position.y + 15.41f, transform.position.z), Quaternion.identity);
+                transform.position = new Vector3(transform.position.x, transform.position.y + 15.41f, transform.position.z);
+            }  
         }
-        transform.position = new Vector3(transform.position.x, transform.position.y + 15.41f, transform.position.z);
     }
 }
