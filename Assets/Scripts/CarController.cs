@@ -7,7 +7,7 @@ public class CarController : MonoBehaviour
     public static CarController instance;
     public Rigidbody2D rb;
     private Vector2 moveInput;
-    public int moveSpeed;
+    public int moveSpeed, verticalMoveSpeed;
     public int counter;
     [SerializeField]
     private Animator anim;
@@ -60,12 +60,7 @@ public class CarController : MonoBehaviour
         SpawnerFollow();
         BordersFollow();
         LevelSwitcher();
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Instantiate(bullet, firePoint.position, firePoint.rotation);
-            AudioController.instance.PlayShootSound();
-        }
+        Shoot();
     }
 
     IEnumerator Wait()
@@ -94,17 +89,26 @@ public class CarController : MonoBehaviour
         {
             ZeroTurn();
         }
-        rb.velocity = (moveHorizontal + moveVertical) * moveSpeed;
+        rb.velocity = (moveHorizontal * moveSpeed) + (moveVertical * verticalMoveSpeed) ;
 
         if (moveHorizontal == new Vector3(0f,0f,0f))
             timeCount = 0;
+    }
+
+    void Shoot()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(bullet, firePoint.position, firePoint.rotation);
+            AudioController.instance.PlayShootSound();
+        }
     }
 
     void TurnRight()
     {
         if (SceneManager.GetActiveScene().name == "level6")
         {
-            image.transform.rotation = Quaternion.Slerp(image.transform.rotation, rightShipTurn, turnSpeed * timeCount);
+            //image.transform.rotation = Quaternion.Slerp(image.transform.rotation, rightShipTurn, turnSpeed * timeCount);
         }
         else
         {
@@ -117,7 +121,7 @@ public class CarController : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "level6")
         {
-            image.transform.rotation = Quaternion.Slerp(image.transform.rotation, leftShipTurn, turnSpeed * timeCount);
+            //image.transform.rotation = Quaternion.Slerp(image.transform.rotation, leftShipTurn, turnSpeed * timeCount);
         }
         else
         {
@@ -139,7 +143,7 @@ public class CarController : MonoBehaviour
 
     void SpawnerFollow()
     {
-        Vector3 carPos = new Vector3(0f, transform.position.y + 15f, 0f);
+        Vector3 carPos = new Vector3(0f, transform.position.y + 15f, -1f);
         spawner.transform.position = carPos;
     }
 
@@ -159,9 +163,15 @@ public class CarController : MonoBehaviour
                 done = true;
             }
         }
-        else if (counter == 17)
+        else if (SceneManager.GetActiveScene().name == "level4" && counter == 17)
         {
             SceneManager.LoadScene("level5");
+            done = true;
+        }
+
+        else if (SceneManager.GetActiveScene().name == "level6" && counter == 22)
+        {
+            SceneManager.LoadScene("level7");
             done = true;
         }
     }

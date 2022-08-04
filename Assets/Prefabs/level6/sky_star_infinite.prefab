@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4444171667536088861}
   - component: {fileID: 4444171667536088860}
+  - component: {fileID: -1132015053430256559}
   m_Layer: 0
   m_Name: sky_star_infinite
   m_TagString: Untagged
@@ -79,3 +80,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1132015053430256559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4444171667536088859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d544533811090419c0c444e59735f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 5

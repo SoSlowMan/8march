@@ -29,5 +29,10 @@ public class BulletScript : MonoBehaviour
             other.GetComponent<EnemyScript>().TakeDamage();
             Destroy(gameObject);
         }
+
+        if (other.tag == "PickupSpawner")
+        {
+            Destroy(gameObject);
+        }
     }
 }

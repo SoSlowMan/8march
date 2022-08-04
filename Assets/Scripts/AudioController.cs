@@ -65,7 +65,7 @@ public class AudioController : MonoBehaviour
     public void PlayEngineSound()
     {
         engineSound.Stop();
-        engineSound.volume = 0.33f;
+        engineSound.volume = 0f;
         engineSound.Play();
     }
 }

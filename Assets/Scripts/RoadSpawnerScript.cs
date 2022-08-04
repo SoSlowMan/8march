@@ -19,8 +19,8 @@ public class RoadSpawnerScript : MonoBehaviour
             }
             else
             {
-                Instantiate(roadBlock, new Vector3(transform.position.x, transform.position.y + 15.41f, transform.position.z), Quaternion.identity);
-                transform.position = new Vector3(transform.position.x, transform.position.y + 15.41f, transform.position.z);
+                Instantiate(roadBlock, new Vector3(transform.position.x, transform.position.y + 9.93f, transform.position.z), Quaternion.identity);
+                transform.position = new Vector3(transform.position.x, transform.position.y + 9.93f, transform.position.z);
             }  
         }
     }

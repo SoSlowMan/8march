@@ -54,4 +54,9 @@ public class PickupSpawnerScript : MonoBehaviour
         }
         
     }
+
+    public void OnTriggerEnter2D()
+    {
+
+    }
 }
